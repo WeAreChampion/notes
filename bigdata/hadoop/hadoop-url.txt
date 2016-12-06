@@ -1,0 +1,5 @@
+[hadoop cluster url]
+http://master:8088
+
+[hadoop hdfs url]
+http://master:50070

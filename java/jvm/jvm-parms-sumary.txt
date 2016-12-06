@@ -1,0 +1,32 @@
+---堆分配参数总结
+# 初始堆大小
+-Xms
+
+# 最大堆大小
+-Xmx
+
+# 设置线程栈的大小
+-Xss
+
+# 设置堆空间最小空闲比例。当堆空间的空闲内存小于这个数值时，JVM便会扩展堆空间。
+-XX:MinHeadpFreeRatio
+
+# 设置堆空间的最大空闲比例。当堆空间的空闲内存大于这个数值时，JVM便会压缩堆空间，得到一个较小的堆。
+-XX:MaxHeadpFreeRatio
+
+# 设置新生代大小
+-XX:NewSize
+
+# 设置老年代与新生代的比例(老年代/新生代)
+-XX:NewRatio
+# 新生代中 eden区 与 survivor区(s0)的比例
+-XX:SurvivorRatio
+
+# 设置最大持久区大小
+-XX:MaxPermSize
+
+# 设置持久区(永久区)的初始值
+-XX:PermSize
+
+# 设置survivor 区的可使用率，当survivor区的空间使用率达到该数值，会将对象送入老年代。
+-XX:TargetSurvivorRatio

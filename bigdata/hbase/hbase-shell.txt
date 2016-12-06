@@ -1,0 +1,63 @@
+# hbase status
+status
+
+# list tables
+list
+
+# create table with tableName and row
+# 可以在后续插入的时候建立，如插入数据时，没有该列，就会插入新列 
+create 'tableName','columnFamily1','columnFamily2'[,...];
+
+# 列出表的信息
+describe 'tableName'
+
+# 插入单元，年龄为24，age='24'
+# put '表名','行键','列族名:列名','值'
+# put 'tableName','rowKey','columnFamily:column','value'
+put'tableName','rowKey','info:age','24'
+# birthday='1992-08-08'
+put 'tableName','rowKey','columnFamily:birthday','1992-08-08'
+
+# 修改表之前要 disable
+disable 'tableName'
+
+# 删除列族 rowKey
+alter 'tableName', {NAME=>'rowKey';METHOD=>'delete'}
+
+# 删除表
+# disable->Drop
+drop 'tableName'
+# 表是否存在
+exists 'tableName'
+# 表在是否线
+is_enabled 'tableName'
+# 表在是否离线
+is_disabled 'tableName'
+
+# query all columnFamily by tableName and rowKey
+# 查询所有的列族信息
+get 'tableName','rowKey'
+# 查询某列族下的信息
+get 'tableName','rowKey','columnFamily'
+# 查询列族下某列的信息
+get 'tableName','rowKey','columnFamily:age'
+# 根据时间戳查询
+get 'tableName', 'rowKey', {COLUMN=>'columnFamily:age',TIMESTAMP=>1321575238965}
+
+# 全表扫描
+scan 'tableName'
+
+# delete 'tableName','列族名','列'
+# 删除列
+delete 'tableName','temp','info:age'
+
+# delete by tableName and rowKey
+# 删除整行
+delete 'tableName','rowKey'
+
+# 表中有多少行
+count 'tableName'
+
+# 清空表
+# Disable->Drop->Create
+truncate 'tableName'

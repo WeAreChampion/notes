@@ -1,0 +1,87 @@
+WEKA: WEKA是一个可用于数据挖掘任务的机器学习算法集合。
+	该算法可以直接应用到数据集或从自己的Java代码调用。 
+	WEKA包含数据预处理，分类，回归，聚类，关联规则，和可视化工具。它也非常适用于开发新的机器学习方案。
+	http://www.cs.waikato.ac.nz/ml/weka/
+
+jmotif: 时间序列、分类、数据挖掘开发库
+	https://github.com/jmotif/sax-vsm_classic
+
+java-ml: Java机器学习库，聚类、分类、特征选择.
+	http://java-ml.sourceforge.net/
+
+flanagan： 数学和统计java开发库，包含回归算法，一次二次线性非线性回归算法，数据平滑算法，傅里叶变换，数值积分，插值法。http://www.ee.ucl.ac.uk/~mflanaga/java/
+
+Mahout: Apache Mahout 是 Apache Software Foundation（ASF） 旗下的一个开源项目，提供一些可扩展的机器学习领域经典算法的实现，旨在帮助开发人员更加方便快捷地创建智能应用程序。经典算法包括聚类、分类、协同过滤、进化编程等等，并且，在 Mahout 的最近版本中还加入了对 Apache Hadoop 的支持，使这些算法可以更高效的运行在云计算环境中。
+	http://mahout.apache.org/
+
+JMulTi: 时间序列分析开发库
+	http://www.jmulti.de/
+
+[Github上关于大数据的开源项目、论文等合集]
+http://www.36dsj.com/archives/20151
+
+[apache math3 demos]
+http://blog.csdn.net/jiutianhe/article/details/41349649
+
+[apache commons desc]
+http://www.tuicool.com/articles/iyEbquE
+
+[Java中用Apache POI生成excel和word文档]
+http://www.2cto.com/kf/201506/410315.html
+
+[pdfbox]
+pdf parse pdfbox
+
+[机器学习介绍]
+http://www.jdon.com/bigdata/java-machine-learning.html
+
+[spark learn]
+http://greemranqq.iteye.com/blog/2241277
+
+[java8 demo]
+http://www.codeceo.com/article/java-8-date-time-api.html
+
+[java 类库]
+http://www.codeceo.com/article/10-tools-improve-java-developer.html
+
+[apache in github]
+https://github.com/apache
+
+[apache spark in github]
+https://github.com/apache/spark.git
+
+[spark with blog]
+http://blog.csdn.net/stark_summer/article/details/44038247
+
+[spark documentation]
+http://spark.apache.org/documentation.html
+
+[dubbo how to use]
+http://www.tuicool.com/articles/uqueUrB
+
+[file listener]
+http://docs.oracle.com/javase/tutorial/essential/io/notification.html
+
+[apache avro]
+http://www.iteblog.com/archives/1008
+
+[spark job]
+http://www.aboutyun.com/thread-8548-1-1.html
+
+[task schedule]
+http://www.tuicool.com/articles/VrqqYne
+
+[spar 入门实战]
+http://www.cnblogs.com/shishanyuan/archive/2015/08/19/4721326.html
+
+[hive]
+http://lxw1234.com/archives/2015/07/378.htm
+
+[Spark Streaming 实时计算框架介绍]
+http://www.cnblogs.com/Leo_wl/p/3530464.html
+
+[Kafka+Spark Streaming+Redis实时计算整合实践]
+http://shiyanjun.cn/archives/1097.html
+
+[简单之美博客园]
+http://shiyanjun.cn/

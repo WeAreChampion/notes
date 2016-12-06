@@ -1,0 +1,24 @@
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-jar-plugin</artifactId>
+	<configuration>
+		<excludes>
+			<exclude>**/res/</exclude>
+			<exclude>**/config/</exclude>
+			<exclude>**/sql/</exclude>
+			<exclude>**/quartz/</exclude>
+			<exclude>**/applicationContext.xml</exclude>
+			<exclude>**/logback.xml</exclude>
+		 </excludes>
+		<archive>
+			<manifest>
+				<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+				<addClasspath>true</addClasspath>
+				<mainClass>com.sky.projects.timer.Timer</mainClass>
+			</manifest>
+			<manifestEntries>
+				<Class-Path>.</Class-Path>
+			</manifestEntries>
+		</archive>
+	</configuration>
+</plugin>

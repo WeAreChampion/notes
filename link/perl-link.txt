@@ -1,0 +1,5 @@
+# perl link
+http://blog.chinaunix.net/uid-9164976-id-2435364.html
+
+[java xls to csb]
+http://www.blogjava.net/jayslong/archive/2011/04/21/convert_xls_and_xlsx_to_csv.html

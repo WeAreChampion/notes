@@ -1,0 +1,40 @@
+# hive format data
+UNIX时间戳转日期函数: from_unixtime
+语法: from_unixtime(bigint unixtime[, string format])
+返回值: string
+说明: 转化UNIX时间戳（从1970-01-01 00:00:00 UTC到指定时间的秒数）到当前时区的时间格式
+举例：
+select from_unixtime(1323308943,'yyyyMMdd') from lxw_dual;
+20111208
+
+2. 获取当前UNIX时间戳函数: unix_timestamp
+语法: unix_timestamp()
+返回值: bigint
+说明: 获得当前时区的UNIX时间戳
+举例：
+hive> select unix_timestamp() from lxw_dual;
+1323309615
+
+3. 日期转UNIX时间戳函数: unix_timestamp
+语法: unix_timestamp(string date)
+返回值: bigint
+说明: 转换格式为"yyyy-MM-dd HH:mm:ss"的日期到UNIX时间戳。如果转化失败，则返回0。
+举例：
+hive> select unix_timestamp('2011-12-07 13:01:03') from lxw_dual;
+1323234063
+
+4. 指定格式日期转UNIX时间戳函数: unix_timestamp
+语法: unix_timestamp(string date, string pattern)
+返回值: bigint
+说明: 转换pattern格式的日期到UNIX时间戳。如果转化失败，则返回0。
+举例：
+select unix_timestamp('20111207 13:01:03','yyyyMMdd HH:mm:ss') from lxw_dual;
+1323234063
+
+5. 日期时间转日期函数: to_date
+语法: to_date(string timestamp)
+返回值: string
+说明: 返回日期时间字段中的日期部分。
+举例：
+select to_date('2011-12-08 10:03:01') from lxw_dual;
+2011-12-08

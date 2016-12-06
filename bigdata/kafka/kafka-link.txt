@@ -1,0 +1,20 @@
+[partition]
+http://www.open-open.com/lib/view/1456844403296
+
+[如何确定 Kafka 分区数、线程数]
+http://www.tuicool.com/articles/Aj6fAj3
+
+[kafka desc]
+http://www.infoq.com/cn/articles/kafka-analysis-part-1
+
+[kafka params]
+http://debugo.com/kafka-params/
+
+[guava cache]
+http://outofmemory.cn/java/guava/cache/how-to-use-guava-cache
+
+# kafka consumer demo
+http://www.open-open.com/lib/view/open1412991579999.html
+
+[examples]
+http://www.programcreek.com/java-api-examples/index.php?api=org.apache.kafka.clients.consumer.KafkaConsumer

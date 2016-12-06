@@ -1,0 +1,11 @@
+INSERT INTO TABLE tableName select fileds... from tableName [where ...];
+
+INSERT overwrite TABLE tableName select fileds... from tableName [where ...];
+
+两种方式的相同点：
+1.两个表的维度必须一样，才能够正常写入
+2.如果查询出来的数据类型和插入表格对应的列数据类型不一致，将会进行转换，转换失败的数据将会为NULL。
+
+不同点：
+1.insert into是增加数据
+2.insert overwrite 是删除原有数据然后在新增数据，如果有分区那么只会删除指定分区数据，其他分区数据不受影响

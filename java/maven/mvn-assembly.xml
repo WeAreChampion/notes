@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+	<id>standalone</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>true</includeBaseDirectory>
+	
+	<fileSets>
+		<fileSet>
+			<directory>version</directory>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>bin</directory>
+			<outputDirectory>bin</outputDirectory>
+			<fileMode>0755</fileMode>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/resources</directory>
+			<outputDirectory>conf</outputDirectory>
+			<excludes>
+				<exclude>mybatis/</exclude>
+			</excludes>
+		</fileSet>
+	</fileSets>
+	
+	<dependencySets>  
+        <dependencySet>  
+            <unpack>false</unpack>  
+            <outputDirectory>lib</outputDirectory>  
+            <useTransitiveFiltering>true</useTransitiveFiltering>  
+            <useStrictFiltering>true</useStrictFiltering>  
+            <fileMode>666</fileMode>  
+            <includes>  
+                <include>org.datanucleus:datanucleus-api-jdo</include>  
+                <include>org.datanucleus:datanucleus-core</include>  
+                <include>org.datanucleus:datanucleus-rdbms</include>  
+            </includes>  
+        </dependencySet>  
+    </dependencySets>  
+	
+	<files>
+		<file>
+			<source>${project.basedir}/target/${project.artifactId}-${project.version}.jar</source>
+			<outputDirectory>bin</outputDirectory>
+			<destName>${project.build.bootstrap}.jar</destName>
+		</file>
+		<file>
+			<source>${project.basedir}/target/${project.artifactId}-${project.version}-${project.build.libs}.jar</source>
+			<outputDirectory>lib</outputDirectory>
+		</file>
+		
+		<file>
+			<source>src/main/resources/applicationContext.xml</source>
+			<outputDirectory>conf</outputDirectory>
+		</file>
+		<file>
+			<source>src/main/resources/applicationContext-config.xml</source>
+			<outputDirectory>conf</outputDirectory>
+		</file>
+		<file>
+			<source>src/main/resources/logback.xml</source>
+			<outputDirectory>conf</outputDirectory>
+		</file>
+    </files>
+    
+</assembly>

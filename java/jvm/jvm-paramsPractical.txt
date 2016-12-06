@@ -1,0 +1,101 @@
+1.JIT编译参数
+JVM的JIT(Just-In-Time)编译器，可以在运行时将字节码编译成本地代码，从而提高函数的执行效率。
+# JIT编译的阈值，当函数调用超过该值时，就会将字节码编译成本地机器代码
+# client模式下，默认值为1500；在server模式下，默认值为10000.
+# JIT编译完成后，JVM会用本地代码替换原来的字节码解释执行，系统在运行中，编译时间会被赚回来.
+-XX:CompileThreshold
+
+# 打印出JIT编译信息
+-XX:+PrintCompilation
+# 打印出JIT编译的耗时
+-XX:+CITime
+
+2.堆快照(堆dump)
+# 在程序发生OOM时，导出应用程序的当前堆快照
+-XX:+HeapDumpOnOutOfMemoryError
+# 指定堆快照的保存位置(-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:/test.dump)
+# 导出的dump文件可以通过VisualVM等工具查看分析，进而定位问题
+-XX:HeapDumpPath
+
+3.错误处理
+系统发生错误时，虚拟机在错误发生时运行一段第三方脚本，如:当OOM时重置系统
+-XX:OnOutOfMemoryError=c:/test.bat
+
+4.获得GC信息
+# 获取gc输出信息;信息输出格式:[GC前的堆栈情况->GC后的堆栈大小(堆栈总大小), GC耗时 secs]
+-verbose:gc
+-XX:+PrintGC
+
+# 获取更加详细的GC信息，还给出了新生代、老年代以及永久区的gc信息及gc耗时
+-XX:+PrintGCDetails
+
+# 在GC发生时刻打印GC发生的时间，将额外输出GC的发生时间，由此知道GC的频率和间隔
+-XX:+PrintGCTimeStamps
+
+# 查看新对象晋升老年代的实际阈值(-XX:+PrintTenuringDistribution -XX:MaxTenuringThreshold=18)
+-XX:+PrintTenuringDistribution
+
+# 每次GC时打印详细的堆信息，信息量较大
+-XX:PrintHeapAtGC
+
+# 查看GC与应用程序相互执行的耗时
+# 显示应用程序在GC时的停顿时间
+-XX:+PrintGCApplicationStoppedTime
+
+# 应用程序在GC停顿期间的执行时间
+-XX:+PrintGCApplicationConcurrentTime
+
+# gc信息保存到文件
+-Xloggc:C:/gc.log
+
+5.类和对象跟踪
+# 跟踪类加载情况
+-XX:+TraceClassLoading
+
+# 跟踪类卸载情况
+-XX:+TraceClassUnloading
+
+# 开关用于打印运行时实例的信息
+# 开关打开时，按Ctrl+Break，会输出系统内类的统计信息
+-XX:+PrintClassHistogram
+
+# JVM在加载类时，出于安全考虑，会对class进行校验和认证，如果类是可信任的，为加快城乡运行速度，可以使用参数禁用校验
+-Xverify:none
+
+6.控制GC
+# 禁止显示的GC操作，即禁止System.gc触发的FullGC
+-XX:+DisableExplicitGC
+
+7.选择类校验器
+# JDK1.6默认开启新的类校验器，加速类的加载
+# 指定使用旧的类校验器(即关闭新的校验器)
+-XX:-UseSplitVerifier
+
+# 新的校验器校验失败，可以使用老的校验器再次校验。可以使用开关关闭再次校验的功能
+-XX:FailOverToOldVerifier
+
+8.Solaris下线程控制
+在Solaris下，JVM提供了几个用于线程控制的开关
+# 绑定所有用户线程到内核线程，减少线程进入饥饿状态的次数
+-XX:+UseBoundThreads
+
+# 使用内核线程替换线程同步
+-XX:+UseLWPSynchronization
+
+# 允许运行时中断线程
+-XX:+UseVMInterruptibleIO
+
+9.使用大页
+对同样大小的内存空间，使用大页后，内存分页的表项就会减少，从而提升cpu从虚拟内存地址映射到物理内存地址的能力。在支持大页的操作系统中，使用JVM参数让虚拟机使用大页，从而提升系统性能。
+# 启用大页
+-XX:+UseLargePages
+
+# 指定大页的大小
+-XX:LargePageSizeInBytes
+
+10.压缩指针
+在64位机上，应用程序所占内存的大小要远超出其在32位操作系统(约1.5倍左右)。因为64位操作系统拥有更宽的寻址空间，与32位相比，指针对象的长度进行了翻倍。为解决这个问题，64位JVM可以使用参数打开指针压缩，从一定程度上减少内存的消耗。
+# 开启指针压缩
+# 指针压缩范围:Class的属性指针(静态成员变量);对象的属性指针;普通对象数组的每个元素指针
+# 压缩可以节省内存，但压缩和解压指针会对JVM造成一定的性能损失
+-XX:+UseCompressedOops

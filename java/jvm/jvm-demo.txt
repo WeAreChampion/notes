@@ -1,0 +1,34 @@
+JMeter是Apache下基于Java的一款性能测试和压力测试工具。其基于Java开发，可对HTTP服务器和FTP服务器，甚至是数据库进行压力测试。
+# 打印GC信息
+-Xloggc:gc.log -XX:+PrintGCDetals
+
+# JMeter测试调优Tomcat
+# 堆大小(最大堆-Xmx与初始堆-Xms)相等
+# 永久区32M(-XX:PermSize与-XXMaxPermSize相等)
+-Xmx512M -Xms512M -XX:PermSize=32M -XX:MaxPermSize=32M -XX:+DisableExplicitGC -Xverify:none
+
+# 新生代老年代都使用并行垃圾回收器代替串行收集器
+-XX:+UseParallelGC -XX:+UseParallelOldGC -XX:ParallelGCThreads=8
+
+---实际工作中可以使用CMS收集器
+# 启用CMS
+-XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=0
+
+# 设置一个较大的survivor区，努力将对象预留在新生代
+-XX:SurvivorRatio=1
+
+# 将CMS的FullGC触发的阈值设置为78%，即当老年代使用达到78%时才触发FullGC
+-XX:CMSInitiatingOccupancyFraction=78
+
+-XX:SoftRefLRUPolicyMSPerMB=0
+
+-XX:+CMSParallelRemarkEnabled
+
+-XX:+UseParNewGC
+
+---summary for 调优过程
+1.确定堆大小(-Xmx,-Xms)
+2.合理分配新生代与老年代(-XX:NewRatio,-Xmn,-XX:SurvivorRatio)
+3.确定永久区大小(-XX:PermSize,-XX:MaxPermSize)
+4.选择垃圾收集器并对垃圾收集器进行合理的配置
+5.禁用显示GC(-XX:+DisableExplicitGC),禁用类元数据回收(-Xnoclassgc),禁用类验证(-Xverify:none)

@@ -1,0 +1,5 @@
+[introduce]
+http://dongxicheng.org/search-engine/thrift-framework-intro/
+
+[guide]
+http://dongxicheng.org/search-engine/thrift-guide/

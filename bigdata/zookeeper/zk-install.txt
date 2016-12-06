@@ -1,0 +1,30 @@
+# zookeeper's zoo.cfg add cluster's hosts
+server.1=host1:2888:3888
+server.2=host2:2888:3888
+server.3=host3:2888:3888
+# server.n=hostn:2888:3888
+
+# 在三台机器上分别写入不同的myid
+# ${dataDir} : dataDir's value
+# host1
+echo "1" > ${dataDir}/myid
+# host2
+echo "2" > ${dataDir}/myid
+# host3
+echo "3" > ${dataDir}/myid
+
+# start zookeeper
+bin/zkServer.sh start
+
+# 查看启动后的状态
+# 在查看启动状态有错误的情况下，稍等一会再查看，因为zookeeper启动后需要一点时间选出leader
+# zookeeper log : zookeeper_home's zookeeper.out
+# 需要关闭防火墙，否则不会选举成功
+bin/zkServer.sh status
+
+# 进入zookeeper的shell客户端
+# 进入本机zookeeper的shell
+bin/zkCli.sh
+
+# 进入指定机器的shell客户端
+bin/zkCli.sh -server host

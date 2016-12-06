@@ -1,0 +1,14 @@
+[hive UDF 过滤字符串中的中英文标点符号]
+http://blog.csdn.net/youngqj/article/details/45334793
+
+[hive string function]
+http://my.oschina.net/crxy/blog/424903
+
+[hive function]
+http://blog.csdn.net/wisgood/article/details/17376393
+
+[hive learn blog]
+http://blog.csdn.net/lifuxiangcaohui/article/details/40588929
+
+[not support]
+http://www.aichengxu.com/view/19543

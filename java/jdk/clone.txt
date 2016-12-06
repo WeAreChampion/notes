@@ -1,0 +1,5 @@
+如果我们要用a2保存a1对象的数据，但又不希望a2对象数据被改变时不影响到a1。实现clone方法是其一种最简单，也是最高效的手段。实现Cloneable接口，然后在重载clone方法，最后在clone方法中调用了super.clone()，意味着super.clone直接或间接调用了java.lang.Object类的clone方法。
+
+当Class A成员变量类型是java的基本类型时（外加String类型）,只要实现如上简单的clone(称影子clone)就可以。但是如果Class A成员变量是数组或复杂类型时，就必须实现深度clone。
+
+需要注意的是Class A存在更为复杂的成员变量时，如Vector等存储对象地址的容器时，就必须clone彻底。
