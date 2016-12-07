@@ -1,0 +1,37 @@
+/**
+	获取整数的二进制位长度
+	x      测长的整数
+	return 整数的二进制位长度
+*/
+int BitLength(int x) {
+	int d = 0;
+	while (x > 0) {
+		//右移一位
+		x >>= 1;
+		d++;
+	}
+	return d;
+}
+/**
+	返回x的二进制表示中从低到高的第i位
+	x   十进制 x
+    i   要求二进制的第i位
+*/
+int BitAt(int x, int i) {
+	return (x & (1 << (i - 1)));
+}
+/**
+	模取幂运算
+	a、b、n：a^b mod n 的对应参数
+    返回值：a^b mod n 的值
+*/
+int Modular_Expoent(int a, int b, int n) {
+	int i, y = 1;
+	for (i = BitLength(b); i > 0; i--) {
+		y = (y * y) % n;
+		if (BitAt(b, i) > 0)
+			y = (y * a) % n;
+	}
+	return y;
+}
+

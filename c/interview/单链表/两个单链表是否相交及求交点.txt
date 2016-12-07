@@ -1,0 +1,44 @@
+Node *intersection(Node *head1, Node *head2) {
+	if(!head1 || !head2) {
+   		return NULL;
+	}
+	int len1 = 1;
+	int len2 = 1;
+	bool result = false;
+	//判断两个链表是否相交，同时记下各个链表的长度
+	Node *p = head1;
+	while(p->next) {
+  		pLen++;
+		p = p->next
+	}
+	q = head2
+	while(q->next) {
+   		len2++;
+		q = q->next
+	}
+	/*
+	They are equals then result is true that means have the same nodes;
+	else is false that means don't have the same nodes.
+	*/
+	result = (p == q);
+	if(result){
+		//To get the abs length distance
+   		int steps = abs(len1 – len2);
+		//To get the max length's Node
+   		Node *head = len1 > len2 ? head1 : head2;
+
+		// the lengther Node go steps
+		while(steps) {
+    			head = head->next
+    			steps--
+		}
+		//go steps the same step
+   		len1 > len2 ? p = head, q = head2 ? q = head, p = head1
+  	 	while(p != q) {
+    			p = p->next;
+    			q = q->next;
+		}
+   		return p;
+	}
+	return NULL;
+}

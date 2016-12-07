@@ -1,0 +1,36 @@
+void sub(char s1[], char s2[], char t[]) {
+	int i, l2, l1, k;
+	l2 = strlen(s2);
+	l1 = strlen(s1);
+	t[l1] = '\0';
+	l1--;
+	for (i = l2 - 1; i >= 0; i--, l1--) {
+		if (s1[l1] - s2[i] >= 0)
+			t[l1] = s1[l1] - s2[i] + '0';
+		else {
+			t[l1] = 10 + s1[l1] - s2[i] + '0';
+			s1[l1 - 1] = s1[l1 - 1] - 1;
+		}
+	}
+	k = l1;
+	while (s1[k] < 0) {
+		s1[k] += 10;
+		s1[k - 1] -= 1;
+		k--;
+	}
+	while (l1 >= 0) {
+		t[l1] = s1[l1];
+		l1--;
+	}
+	loop: if (t[0] == '0') {
+		l1 = strlen(s1);
+		for (i = 0; i < l1 - 1; i++)
+			t[i] = t[i + 1];
+		t[l1 - 1] = '\0';
+		goto loop;
+	}
+	if (strlen(t) == 0) {
+		t[0] = '0';
+		t[1] = '\0';
+	}
+}

@@ -1,0 +1,41 @@
+﻿/**
+	全部替换
+	str[]  在此源字符串进行替换操作
+	key[]  被替换的字符串，不能为空串
+	swap[] 替换的字符串，可以为空串，为空串表示在源字符中删除key[]
+*/
+void replace(char str[], char key[], char swap[]) {
+	int l1, l2, l3, i, j, flag;
+	char tmp[1000];
+	l1 = strlen(str);
+	l2 = strlen(key);
+	l3 = strlen(swap);
+	for (i = 0; i <= l1 - l2; i++) {
+		flag = 1;
+		
+		//先查找key串
+		for (j = 0; j < l2; j++)
+			if (str[i + j] != key[j]) {
+				flag = 0;
+				break;
+			}
+		//找到key串，则进行替换
+		if (flag) {
+			//copy str to tmp
+			strcpy(tmp, str);
+
+			//copy swap to tmp[i]
+			strcpy(&tmp[i], swap);
+
+			//copy str[i + l2] to tmp[i + l3]
+			strcpy(&tmp[i + l3], &str[i + l2]);
+
+			//copy tmp tp str
+			strcpy(str, tmp);
+
+			//
+			i += l3 - 1;
+			l1 = strlen(str);
+		}
+	}
+}

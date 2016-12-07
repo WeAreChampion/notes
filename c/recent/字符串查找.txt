@@ -1,0 +1,25 @@
+/**
+	在串str[]中查找串key[]
+	str[]  待被查找的串
+	key[]  需查找的目的串
+*/
+int strfind(char str[], char key[]) {
+	int l1, l2, i, j, flag;
+	l1 = strlen(str);
+	l2 = strlen(key);
+	
+	//只需遍历到l1-l2即可
+	for (i = 0; i <= l1 - l2; i++) {
+		flag = 1;
+		for (j = 0; j < l2; j++)
+			if (str[i + j] != key[j]) {
+				//置标记位，跳出循环
+				flag = 0;
+				break;
+			}
+		//若有找到，返回i的位置
+		if (flag)
+			return i;
+	}
+	return -1;
+}

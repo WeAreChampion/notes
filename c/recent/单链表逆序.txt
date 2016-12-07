@@ -1,0 +1,49 @@
+/*
+方法一：
+设置两个临时指针pre和ne分别标记当前指针的前驱和后继，将当前结点的next指针指向前驱，
+然后把前驱指针和当前指针往后移动，继续遍历，当然每次移动后都要重新标记当前结点的后
+继结点
+*/
+void reverse(list *&head)
+{
+	if(list == NULL)
+	{
+		return ;
+	}
+	else
+	{
+		list *pre = head;
+		list *cur = head->next;
+		list *ne;
+		while(cur != NULL)
+		{
+			ne = cur->next;
+			cur->next = pre;
+			pre = cur;
+			cur = next;
+		}
+		head->next = NULL;
+		head = pre;
+	}
+}
+
+/*
+方法2：
+采用递归的方式，如果要将当前结点逆序，那么先将它的后继结点都逆序，然后把逆序
+后的尾结点的next指向当前结点即可，要注意的是递归出口，我们选择链表为空或者只
+有一个结点的情况为递归出口
+*/
+list *reverse(list *p, list *&head)
+{
+	// is NULL or only one node
+	if(p == NULL || p->next == NULL) {
+		head = p;
+		return p;
+	} else {
+		// reverse p->next
+		list *temp = reverse(p->next, head);
+		// add p after temp
+		temp->next = p;
+		return p;
+	}
+}

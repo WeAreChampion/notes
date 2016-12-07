@@ -1,0 +1,18 @@
+bool isExitsLoop(Node* head) {
+	Node *slow = head, *fast = head;
+	//fast && fast->next保证了fast可以接着向下移动
+	while(fast && fast->next) {
+		//slow 每次走一步
+		slow = slow->next;
+		//fast 每次走两步
+		fast = fast->next->next;
+		//若相遇，则证明有环
+   		if(slow == fast) {
+    			break;
+		}
+	}
+	/*
+	上述程序结束循环的条件是fast->next == NULL或者fast为NULL或者slow == fast，综上所述若fast为NULL或者fast->next为NULL则没有环，返回false；否则有环，返回true
+	*/
+	return !(fast == NULL || fast->next == NULL);
+}

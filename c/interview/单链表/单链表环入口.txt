@@ -1,0 +1,26 @@
+Node* findLoopPort(Node *head) {
+	Node *slow = head, *fast=head;
+	//找到相遇点
+	while(fast && fast->next) {
+		//slow go one step
+   		slow = slow->next;
+		//fast go 2 steps
+   		fast = fast->next->next;
+   		if(fast == slow) {
+    			break;
+		}
+	}
+	//don't have the circle.没有环
+	if(fast == NULL || fast->next == NULL) {
+   		return NULL;
+	}
+
+	//此时，fast和slow都指向相遇点
+	slow = head   //slow指向头节点
+	while(slow != fast) {
+		//they both go one step
+   		slow = slow->next;
+   		fast = fast->next;
+	}
+	return slow;
+}

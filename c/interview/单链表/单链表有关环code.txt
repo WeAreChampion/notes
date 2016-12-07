@@ -1,0 +1,214 @@
+#include <iostream>
+using namespace std;
+class Node{
+public:
+	Node(int d):data(d), next(NULL){}
+	int data;
+	Node *next;
+};
+void displayLinkList(Node *head, int n){
+	n = n + 2;
+	for (int i = 0; i < n && head; i ++, head = head->next)
+   		cout << head->data << " ";
+	cout << endl;
+}
+//单链表是否存在环
+bool isExitsLoop(Node *head){
+	Node *fast = head;
+	Node *slow = head;
+	while(fast && fast->next){
+   		slow = slow->next;
+   		fast = fast->next->next;
+   		if (fast == slow)
+   			break;
+	}
+	if (fast && fast->next)
+   		return true;
+	else
+   		return false;
+}
+//求单链表的环的第一个入口
+Node *findLoopPort(Node *head){
+	Node *fast = head;
+	Node *slow = head;
+	while (fast && fast->next) {
+   		slow = slow->next;
+ 		fast = fast->next->next;
+   		if (slow == fast)
+    			break;
+	}
+	bool result;
+	if (fast && fast->next)
+   		result = true;
+	else
+		result = false;
+
+	//slow -> head and go with the fast
+	if (result) {
+   		slow = head;
+		// is equal then break circle
+  		while (slow != fast) {
+    			slow = slow->next;
+    			fast = fast->next;
+   		}
+   		return slow;
+	}
+	return NULL;
+}
+void testIsExitLopp(Node *head, int n){
+	displayLinkList(head, n);
+	if (isExitsLoop(head))
+   		cout << "head has loop" << endl;
+	else
+   		cout << "head does not have loop" << endl;
+	Node *result = findLoopPort(head);
+	if (result)
+   		cout << "head has loop, loop port is " << result->data << endl;
+	else
+  		cout << "head does not have loop" << endl;
+}
+//
+bool intersect3(Node *head1, Node *head2){
+	Node *tail2 = head2;
+	while (tail2->next) {
+		tail2 = tail2->next;
+		tail2->next = head2;
+	}
+	bool result = isExitsLoop(head1);
+	tail2->next = NULL;
+	return result;
+}
+void testIntersect3(Node *head1, Node *head2){
+	if (intersect3(head1, head2))
+   		cout << "intersect" << endl;
+	else
+  	 	cout << "not intersect" << endl;
+}
+bool intersect4(Node *head1, Node *head2){
+	Node *tail1 = head1;
+	Node *tail2 = head2;
+	while (tail1->next)
+   		tail1 = tail1->next;
+	while (tail2->next)
+		tail2 = tail2->next;
+	return tail1 == tail2;
+}
+void testIntersect4(Node *head1, Node *head2){
+	if (intersect4(head1, head2))
+   		cout << "intersect" << endl;
+	else
+   		cout << "not intersect" << endl;
+}
+//
+Node *findFirstIntersection(Node *head1, Node *head2){
+	if (head1 == NULL|| head2 == NULL)
+		return NULL;
+	int len1 = 1;
+	int len2 = 1;
+	bool result = false;
+	Node *p = head1;
+	Node *q = head2;
+	while (p->next) {
+   		len1 ++;
+   		p = p->next;
+	}
+
+	while (q->next) {
+   		len2 ++;
+   		q = q->next;
+	}
+	result = (p == q);
+	if (result) {
+   		int steps = abs(len1 - len2);
+   		Node *head = (len1 > len2) ? head1 : head2;
+  		while (steps) {
+    			head = head->next;
+ 			steps --;
+   		}
+   		(len1 > len2) ? (p = head, q = head2) : (p = head1, q = head);
+   		while (p != q) {
+    			p = p->next;
+    			q = q->next;
+   		}
+   		return p;
+	}
+	return NULL;
+}
+void testFindFirstIntersection(Node *head1, Node *head2){
+	Node *result = findFirstIntersection(head1, head2);
+	if (result == NULL)
+   		cout << "no intersection" << endl;
+	else
+   		cout << "first intersection is " << result->data << endl;
+}
+int main(){
+	Node *head1 = NULL;   //hasLoop
+	Node *head2 = NULL;   //noLoop
+
+	//construct head1
+	Node *tail = NULL;
+	for (int i = 0; i < 10; i ++) {
+   		Node *p = new Node(i + 1);
+   		if (head1 == NULL) {
+    			head1 = p;
+    			tail = head1;
+   		}
+		else {
+    			tail->next = p;
+    			tail = p;
+   		}
+	}
+	Node *p = head1;
+	for (i = 1; i < 5; i ++) {
+   		p = p->next;
+		tail->next = p;
+	}
+
+	//consruct head2
+	tail = NULL;
+	for (i = 0; i < 10; i ++) {
+   		Node *p = new Node(i + 1);
+   		if (head2 == NULL) {
+    			head2 = p;
+    			tail = p;
+   		}else{
+   			tail->next = p;
+    			tail = p;
+   		}
+	}
+	testIsExitLopp(head1, 10);
+	testIsExitLopp(head2, 10);
+	cout << "test two link list insert or not" << endl;
+	Node *head3 = NULL;
+	Node *head4 = NULL;
+	Node *p1 = new Node(1);
+	Node *p2 = new Node(2);
+	Node *p3 = new Node(3);
+	Node *p4 = new Node(4);
+	Node *p5 = new Node(5);
+	Node *p11 = new Node(11);
+	Node *p12 = new Node(12);
+	Node *p13 = new Node(13);
+	Node *p14 = new Node(14);
+	Node *p15 = new Node(15);
+	head3 = p1;
+	p1->next = p2;
+	p2->next = p3;
+	p3->next = p4;
+	p4->next = p5;
+
+	head4 = p11;
+	p11->next = p12;
+	p12->next = p13;
+	p13->next = p14;
+	p14->next = p15;
+	p15->next = p3;
+	testIntersect3(head3, head4);
+	testIntersect4(head3, head4);
+	testFindFirstIntersection(head3, head4);
+	p15->next = NULL;
+	testIntersect3(head3, head4);
+	testIntersect4(head3, head4);
+	testFindFirstIntersection(head3, head4);
+	return 0;
+}
